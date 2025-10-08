@@ -3,14 +3,17 @@ import { concursantesData } from '../data/concursantes';
 import ConcursanteCard from '../components/ConcursanteCard.astro';
 import ModalWrapper from '../components/ModalWrapper.jsx';
 import '../styles/global.css'; 
-
+import { slide, fade } from 'astro:transitions';
 ---
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
+	
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OT Votaciones</title>
+
 </head>
 <body class="min-h-screen bg-gray-900 p-8">
     <main class="max-w-6xl mx-auto">
@@ -18,7 +21,7 @@ import '../styles/global.css';
             Vota al Favorito de OT
         </h1>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div transition:animate={slide({ duration: '1s' })} class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{concursantesData.map((concursantes) => (
 				<ModalWrapper
 					client:load

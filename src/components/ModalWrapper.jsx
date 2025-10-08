@@ -3,31 +3,65 @@ import Votacion from "./Votacion";
 
 const ModalWrapper = ({ concursante, children }) => {
     
-
     const [isModalOpen, setIsModalOpen] = useState(false); 
 
-   
-    const openModal = () => {
+    // Función que muestra el modal
+    const toggleModal = () => {
         setIsModalOpen(true);
-        document.body.style.overflow = 'hidden'; // desactiva el scroll
+    };
+
+    const openModal = () => {
+        // Inicia la View Transition
+        if (concursante.estado==='expulsado'){
+            console.log(` ${concursante.nombre} está expulsado.`)
+            return;
+        }
+
+        if (document.startViewTransition) {
+            
+            // Llama a la API de transición y hace la animación
+            document.startViewTransition(() => {
+                toggleModal();
+            });
+            
+        } else {
+            // En caso que no sea compatible abre la modal sin animación
+            toggleModal();
+        }
     };
 
     const closeModal = () => {
-        setIsModalOpen(false);
-        document.body.style.overflow = 'unset'; //activa el scroll
+        
+       // Cierra el modal con animación
+       const toggleModalClose = () => {
+             setIsModalOpen(false);
+       };
+
+        if (document.startViewTransition) {
+
+            // Llama a la API de transición y hace la animación
+            document.startViewTransition(() => {
+               toggleModalClose();
+           });
+
+        } else {
+           // En caso que no sea compatible cierra la modal sin animación
+           toggleModalClose();
+       }
     };
+    const isExpulsado = concursante.estado === 'expulsado'; //Es una constante booleana para poder filtrar entre los expulsados.
 
     return (
         <>
             {/* 1. La Tarjeta (Sigue siendo el botón para abrir la modal) */}
-            <div onClick={openModal} className="cursor-pointer">
+            <div onClick={isExpulsado ? undefined : openModal} className={isExpulsado ? 'cursor-not-allowed' : 'cursor-pointer'}>
                 {children}
             </div>
 
             {/* 2. La Modal/Isla Flotante */}
             {isModalOpen && (
                 <div 
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm p-4"
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75 backdrop-blur-sm p-4"
                     onClick={closeModal} 
                 >
                     {/* Contenido de la Modal: Aumentado el ancho a max-w-2xl */}
