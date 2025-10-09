@@ -1,7 +1,7 @@
 ---
+import ScoreDisplay from "./ScoreDisplay";
 
-
-const {nombre, estado, imagen}= Astro.props;
+const {nombre, estado, imagen, id}= Astro.props;
 
 let borderColor = 'border-gray-900';
 let statusText = 'Activo';
@@ -32,4 +32,8 @@ if (estado === 'nominado') {
 </div>
 <div class="p-5">
         <h2 class="text-3xl text-center font-bold mb-4 text-gray-800">{nombre}</h2>
+        <ScoreDisplay 
+            client:load 
+            concursanteId={id} 
+        />
 </article>

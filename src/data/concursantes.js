@@ -15,7 +15,6 @@ export const concursantesData = [
     { id: 12, nombre: "Téyou", estado: "concursante", imagen: "/concursantes/teyou.avif" }, 
     { id: 13, nombre: "Tinho", estado: "concursante", imagen: "/concursantes/tinho.avif" },
     { id: 14, nombre: "Lucía Casani", estado: "concursante", imagen: "/concursantes/lucia.avif" },
-    { id: 15, nombre: "Guillo Rist", estado: "concursante", imagen: "/concursantes/guillo.avif" },
-    { id: 16, nombre: "Laura Muñoz", estado: "nominado", imagen: "/concursantes/laura.avif" },
-    { id: 17, nombre: "Ivan Rojo", estado: "expulsado", imagen: "/concursantes/ivan.avif" },     
+    { id: 15, nombre: "Laura Muñoz", estado: "nominado", imagen: "/concursantes/laura.avif" },
+    { id: 16, nombre: "Ivan Rojo", estado: "expulsado", imagen: "/concursantes/ivan.avif" },     
 ]

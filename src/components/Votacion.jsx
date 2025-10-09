@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 
-const Categorias = ['Voz', 'Actuación', 'General'];
+const Categorias = ['Voz', 'Actuacion', 'General'];
 
 const Votacion = ({ concursanteId, nombreConcursante, onVoteSuccess}) => { //Donde se guarda las puntuaciones.
     const [puntuaciones, setPuntuaciones] = useState ({
         Voz: '',
-        Actuación: '',
+        Actuacion: '',
         General: '',
     });
 
@@ -23,9 +23,24 @@ const handleInputChange = (e) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(`Votando por ${nombreConcursante}:`, puntuaciones);
+        //Obtenemos los votos existentes de localStorage y lo inicializa
+        const votos = JSON.parse(localStorage.getItem('ot_concursantes_votos') || '{}'); 
+        //Guarda las puntuaciones para el concursante actual
+        votos[concursanteId] = {
+            id: concursanteId,
+            nombre: nombreConcursante,
+            Voz: parseInt(puntuaciones.Voz) || 0,
+            Actuacion: parseInt(puntuaciones.Actuacion) || 0,
+            General: parseInt(puntuaciones.General) || 0,
+        };
 
-        setPuntuaciones({ Voz: '', Actuación: '', General: ''});
+        //Guarda los votos actualizados
+        localStorage.setItem('ot_concursantes_votos', JSON.stringify(votos));
+        console.log(`Votación guardada para ${nombreConcursante}:`, votos[concursanteId]);
+
+        window.dispatchEvent(new Event ('ot_vote_cast')); //Evento para re-renderizar las tarjetas.
+
+        setPuntuaciones({ Voz: '', Actuacion: '', General: ''}); //Resetea y cierra el modal.
         if (onVoteSuccess) {
             onVoteSuccess();
         }
@@ -49,7 +64,7 @@ return (
                             value={puntuaciones[cat]}
                             onChange={handleInputChange}
                             className="w-full text-center text-gray-900 font-bold text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-md border-none"
-                            placeholder="10"
+                            placeholder="0-10"
                             required
                         />
                     </div>

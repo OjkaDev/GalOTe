@@ -3,7 +3,7 @@ import { concursantesData } from '../data/concursantes';
 import ConcursanteCard from '../components/ConcursanteCard.astro';
 import ModalWrapper from '../components/ModalWrapper.jsx';
 import '../styles/global.css'; 
-import { slide, fade } from 'astro:transitions';
+import { fade } from 'astro:transitions';
 ---
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@ import { slide, fade } from 'astro:transitions';
             Vota al Favorito de OT
         </h1>
         
-        <div transition:animate={slide({ duration: '1s' })} class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div transition:animate={fade({ duration: '1s' })} class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{concursantesData.map((concursantes) => (
 				<ModalWrapper
 					client:load
@@ -30,6 +30,7 @@ import { slide, fade } from 'astro:transitions';
 					
 				
 				<ConcursanteCard
+					id={concursantes.id}
 					nombre={concursantes.nombre}
 					estado={concursantes.estado}
 					imagen={concursantes.imagen}
