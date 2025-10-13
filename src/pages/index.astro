@@ -2,6 +2,7 @@
 import { concursantesData } from '../data/concursantes';
 import ConcursanteCard from '../components/ConcursanteCard.astro';
 import ModalWrapper from '../components/ModalWrapper.jsx';
+import ResetButton from '../components/ResetButton.jsx';
 import '../styles/global.css'; 
 import { fade } from 'astro:transitions';
 ---
@@ -18,9 +19,11 @@ import { fade } from 'astro:transitions';
 <body class="min-h-screen bg-gray-900 p-8">
     <main class="max-w-6xl mx-auto">
         <h1 class="text-5xl font-extrabold text-indigo-700 mb-10 text-center">
-            Vota al Favorito de OT
+            Votaciones de OT
         </h1>
-        
+        <div class="mb-8 flex justify-center">
+			<ResetButton client:load />
+		</div>
         <div transition:animate={fade({ duration: '1s' })} class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{concursantesData.map((concursantes) => (
 				<ModalWrapper
