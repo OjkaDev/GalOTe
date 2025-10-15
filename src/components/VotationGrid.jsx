@@ -5,7 +5,7 @@ import ModalWrapper from './ModalWrapper';
 import { fade } from 'astro:transitions';
 
 const VotationGrid = ({ initialData }) => {
-    const concursanteClasificados = useVotationData(initialData);
+    const concursantesClasificados = useVotationData(initialData);
 
    return (
         <div 
