@@ -5,6 +5,7 @@ import ModalWrapper from '../components/ModalWrapper.jsx';
 import ResetButton from '../components/ResetButton.jsx';
 import '../styles/global.css'; 
 import { fade } from 'astro:transitions';
+import ScoreDisplay from '../components/ScoreDisplay.jsx';
 ---
 
 <!DOCTYPE html>
@@ -24,6 +25,7 @@ import { fade } from 'astro:transitions';
         <div class="mb-8 flex justify-center">
 			<ResetButton client:load />
 		</div>
+			<ScoreDisplay client:load />
         <div transition:animate={fade({ duration: '1s' })} class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{concursantesData.map((concursantes) => (
 				<ModalWrapper

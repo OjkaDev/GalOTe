@@ -1,62 +1,49 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useState } from "react";
 
-const ScoreDisplay = ({ concursanteId }) => {
-    const [scores, setScores] = useState(null);
+const ScoreDisplay = () => {
+  const [votos, setVotos] = useState({});
 
-    const getVotes = () => {  //Función que lee los votos del localStorage
-        try {
-            const storedVotes = localStorage.getItem('ot_concursantes_votos');
-            if (storedVotes) {
-                const votos = JSON.parse(storedVotes);
-                return votos[concursanteId] || null;
-            }
-        } catch (e) {
-            console.error("Error al leer localStorage:", e);
-        }
-        return null;
+  // Función para leer los votos del localStorage
+  const loadVotos = () => {
+    const stored = JSON.parse(localStorage.getItem("ot_concursantes_votos") || "{}");
+    setVotos(stored);
+  };
+
+  // Cargamos los votos al montar el componente
+  useEffect(() => {
+    loadVotos();
+
+    // Escuchamos el evento global para actualizar cuando alguien vote
+    const handleVoteEvent = () => {
+      loadVotos();
     };
+    window.addEventListener("ot_vote_cast", handleVoteEvent);
 
-    useEffect(() => { 
-        // Carga las puntuaciones iniciales
-        const initialScores = getVotes();
-        setScores(initialScores);
+    // Limpiamos listener al desmontar
+    return () => {
+      window.removeEventListener("ot_vote_cast", handleVoteEvent);
+    };
+  }, []);
 
-        // Define el listener para futuras actualizaciones
-        const updateScores = () => {
-            setScores(getVotes());
-        };
+  // Convertimos votos a array y los ordenamos por puntuación general
+  const sortedVotos = Object.values(votos).sort((a, b) => b.General - a.General);
 
-        window.addEventListener('ot_vote_cast', updateScores); //Evento global para re-rendedirzar.
-
-        return () => window.removeEventListener('ot_vote_cast', updateScores); //Elimina el listener al desmontar el componente.
-    }, [concursanteId]);
-
-    if(!scores) {
-        return <p className="text-center text-sm text-gray-500 mt-2">Sin votos registrados</p>
-    }
-
-    const totalScore = scores.Voz + scores.Actuacion + scores.General;
-    const average = (totalScore / 3).toFixed(1);
-
-     return (
-        <div className="mt-3 pt-3 border-t border-gray-200">
-            <h4 className="text-sm font-semibold text-gray-600 mb-2 text-center">Tus Últimos Votos:</h4>
-            <div className="flex justify-around text-center">
-                <div className="flex flex-col items-center">
-                    <span className="text-xs text-gray-500">Voz</span>
-                    <span className="text-lg font-bold text-indigo-700">{scores.Voz}</span>
-                </div>
-                <div className="flex flex-col items-center">
-                    <span className="text-xs text-gray-500">Actuación</span>
-                    <span className="text-lg font-bold text-indigo-700">{scores.Actuacion}</span>
-                </div>
-                <div className="flex flex-col items-center">
-                    <span className="text-xs text-gray-500">Media</span>
-                    <span className="text-xl font-extrabold text-green-600">{average}</span>
-                </div>
-            </div>
-        </div>
-    );
+  return (
+    <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg w-full max-w-md mx-auto mb-8">
+      <h2 className="text-xl font-bold mb-2 text-center">Ranking de la Gala</h2>
+      <ul className="space-y-2">
+        {sortedVotos.map((c, index) => (
+          <li
+            key={c.id}
+            className="flex justify-between items-center bg-gray-700 p-2 rounded-lg"
+          >
+            <span>{c.nombre}</span>
+            <span>{c.General}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default ScoreDisplay;

@@ -1,5 +1,5 @@
 ---
-import ScoreDisplay from "./ScoreDisplay";
+import ConcursanteScoreDisplay from "./ConcursanteScoreDisplay";
 
 const {nombre, estado, imagen, id}= Astro.props;
 
@@ -32,7 +32,7 @@ if (estado === 'nominado') {
 </div>
 <div class="p-5">
         <h2 class="text-3xl text-center font-bold mb-4 text-gray-800">{nombre}</h2>
-        <ScoreDisplay 
+        <ConcursanteScoreDisplay 
             client:load 
             concursanteId={id} 
         />
