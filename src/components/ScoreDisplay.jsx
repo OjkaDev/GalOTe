@@ -39,7 +39,11 @@ const ScoreDisplay = () => {
     const media = (v.Voz + v.Actuacion + v.General) / 3;
     return { ...c, media, ...v };
     })
-    .sort((a, b) => b.General - a.General);
+    .sort((a, b) => b.media - a.media);
+
+  const allRated = sortedVotos.every(c => c.media > 0);
+  const favoritoId = allRated ? sortedVotos[0].id : null;
+  const nominadosIds = allRated ? sortedVotos.slice(-4).map(c => c.id) : [];
 
     useEffect(() => {
     const newPositions = {};
@@ -68,26 +72,38 @@ const ScoreDisplay = () => {
     setDeltas(newDeltas);
   }, [votos]);
 
-  return (
+return (
     <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg w-full max-w-md mx-auto mb-8">
       <h2 className="text-xl font-bold mb-2 text-center">Ranking de la Gala</h2>
       <ul className="space-y-2">
         {sortedVotos.map((c, index) => (
           <li
             key={c.id}
-            ref={(el) => (listRefs.current[c.id] = el)}
+            ref={el => (listRefs.current[c.id] = el)}
             className={`flex justify-between items-center p-2 rounded-lg transition-all duration-500 ${
-              highlight === c.id ? "bg-green-500 scale-105" : "bg-gray-700"
+              highlight === c.id
+                ? "bg-green-500 scale-105"
+                : nominadosIds.includes(c.id) && allRated
+                ? "bg-red-700"
+                : "bg-gray-700"
             }`}
             style={{
               position: "relative",
-              transform: deltas[c.id] ? `translateY(${deltas[c.id]}px)` : "translateY(0)",
+              transform: deltas[c.id] ? `translateY(${deltas[c.id]}px)` : "translateY(0)"
             }}
             onTransitionEnd={() => {
-              setDeltas((prev) => ({ ...prev, [c.id]: 0 }));
+              setDeltas(prev => ({ ...prev, [c.id]: 0 }));
             }}
           >
-            <span>{index + 1}. {c.nombre}</span>
+            <span className="flex items-center gap-2">
+              {index + 1}. {c.nombre}
+              {allRated && c.id === favoritoId && (
+                <span title="Favorito de la gala">⭐</span>
+              )}
+              {allRated && nominadosIds.includes(c.id) && (
+                <span title="Posible nominado">❌</span>
+              )}
+            </span>
             <span>{c.media.toFixed(1)}</span>
           </li>
         ))}
