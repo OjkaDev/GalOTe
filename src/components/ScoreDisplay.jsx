@@ -1,7 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import {concursantesData} from "../data/concursantes.js";
 
 const ScoreDisplay = () => {
   const [votos, setVotos] = useState({});
+  const [prevPositions, setPrevPositions] = useState({});
+  const [highlight, setHighlight] = useState(null);
+  const [deltas, setDeltas] = useState({});
+  const listRefs = useRef({}); // guardamos referencia a cada <li> para medir su posición
+
 
   // Función para leer los votos del localStorage
   const loadVotos = () => {
@@ -26,7 +32,41 @@ const ScoreDisplay = () => {
   }, []);
 
   // Convertimos votos a array y los ordenamos por puntuación general
-  const sortedVotos = Object.values(votos).sort((a, b) => b.General - a.General);
+  const sortedVotos = concursantesData
+    .filter(c => c.estado !== "expulsado")
+    .map(c => {
+    const v = votos[c.id] || { Voz: 0, Actuacion: 0, General: 0 };
+    const media = (v.Voz + v.Actuacion + v.General) / 3;
+    return { ...c, media, ...v };
+    })
+    .sort((a, b) => b.General - a.General);
+
+    useEffect(() => {
+    const newPositions = {};
+    const newDeltas = {};
+
+    sortedVotos.forEach((c) => {
+      if (listRefs.current[c.id]) {
+        const rect = listRefs.current[c.id].getBoundingClientRect();
+        newPositions[c.id] = rect.top;
+
+        if (prevPositions[c.id] !== undefined) {
+          newDeltas[c.id] = prevPositions[c.id] - rect.top; // Diferencia vertical
+        } else {
+          newDeltas[c.id] = 0;
+        }
+
+        // Detectamos si subió de posición
+        if (prevPositions[c.id] !== undefined && prevPositions[c.id] > rect.top) {
+          setHighlight(c.id);
+          setTimeout(() => setHighlight(null), 500); // Quitamos highlight después de 0.5s
+        }
+      }
+    });
+
+    setPrevPositions(newPositions);
+    setDeltas(newDeltas);
+  }, [votos]);
 
   return (
     <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg w-full max-w-md mx-auto mb-8">
@@ -35,10 +75,20 @@ const ScoreDisplay = () => {
         {sortedVotos.map((c, index) => (
           <li
             key={c.id}
-            className="flex justify-between items-center bg-gray-700 p-2 rounded-lg"
+            ref={(el) => (listRefs.current[c.id] = el)}
+            className={`flex justify-between items-center p-2 rounded-lg transition-all duration-500 ${
+              highlight === c.id ? "bg-green-500 scale-105" : "bg-gray-700"
+            }`}
+            style={{
+              position: "relative",
+              transform: deltas[c.id] ? `translateY(${deltas[c.id]}px)` : "translateY(0)",
+            }}
+            onTransitionEnd={() => {
+              setDeltas((prev) => ({ ...prev, [c.id]: 0 }));
+            }}
           >
-            <span>{c.nombre}</span>
-            <span>{c.General}</span>
+            <span>{index + 1}. {c.nombre}</span>
+            <span>{c.media.toFixed(1)}</span>
           </li>
         ))}
       </ul>
