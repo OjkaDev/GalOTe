@@ -65,6 +65,16 @@ const ScoreDisplay = () => {
     setDeltas(newDeltas);
   }, [votos]);
 
+  // Cerrar ranking cuando se abre un modal.
+   useEffect(() => {
+    const handleOpenModal = () => {
+      setShowModal(false); // ✅ Aquí cerramos el ranking en móvil
+    };
+
+    window.addEventListener("ot_open_modal", handleOpenModal);
+    return () => window.removeEventListener("ot_open_modal", handleOpenModal);
+  }, []);
+
   // Contenido del ranking
   const RankingContent = (
     <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg w-full md:w-72 mx-auto mb-8">
@@ -121,8 +131,8 @@ const ScoreDisplay = () => {
         </button>
 
         {showModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-            <div className="relative w-11/12 max-w-md transform transition-all duration-300 scale-90 opacity-0 animate-scaleIn">
+          <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[9999] pointer-events-auto">
+            <div className="relative w-11/12 max-w-md transform transition-all duration-300 scale-90 animate-scaleIn z-[10000] pointer-events-auto">
               {RankingContent}
               <button
                 onClick={() => setShowModal(false)}
