@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Votacion from "./Votacion"; 
 
 const ModalWrapper = ({ concursante, children }) => {
@@ -50,6 +50,18 @@ const ModalWrapper = ({ concursante, children }) => {
        }
     };
     const isExpulsado = concursante.estado === 'expulsado'; //Es una constante booleana para poder filtrar entre los expulsados.
+
+    useEffect(() => {
+        const handleOpenModal = (e) => {
+            const { id } = e.detail || {};
+            if (id === concursante.id) {
+                openModal();
+            }
+        };
+
+        window.addEventListener("ot_open_modal", handleOpenModal);
+        return () => window.removeEventListener("ot_open_modal", handleOpenModal);
+    }, [concursante]);
 
     return (
         <>

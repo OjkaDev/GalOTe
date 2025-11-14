@@ -1,0 +1,25 @@
+---
+// ConcursantesList.astro
+const { concursantes } = Astro.props;
+import ConcursanteCard from './ConcursanteCard.astro';
+import ToggleExpelled from './ToggleExpelled.jsx';
+const [showExpelled, setShowExpelled] = Astro.useState(true);
+
+const filtered = showExpelled ? concursantes : concursantes.filter(c => c.estado !== 'expulsado');
+---
+
+<div class="mb-8 flex justify-center">
+  <ToggleExpelled client:load onToggle={setShowExpelled} />
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {filtered.map(c => (
+    <ConcursanteCard
+      key={c.id}
+      id={c.id}
+      nombre={c.nombre}
+      estado={c.estado}
+      imagen={c.imagen}
+    />
+  ))}
+</div>

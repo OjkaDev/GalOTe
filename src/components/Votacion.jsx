@@ -12,7 +12,7 @@ const Votacion = ({ concursanteId, nombreConcursante, onVoteSuccess}) => { //Don
 const handleInputChange = (e) => {
     const {name, value } = e.target;
 
-    let numValue = Math.max(0, Math.min(10, parseInt(value) || 0));
+    let numValue = Math.max(0, Math.min(10, parseFloat(value) || 0));
 
     setPuntuaciones(prev => ({
         ...prev,
@@ -29,9 +29,9 @@ const handleInputChange = (e) => {
         votos[concursanteId] = {
             id: concursanteId,
             nombre: nombreConcursante,
-            Voz: parseInt(puntuaciones.Voz) || 0,
-            Actuacion: parseInt(puntuaciones.Actuacion) || 0,
-            General: parseInt(puntuaciones.General) || 0,
+            Voz: parseFloat(puntuaciones.Voz) || 0,
+            Actuacion: parseFloat(puntuaciones.Actuacion) || 0,
+            General: parseFloat(puntuaciones.General) || 0,
         };
 
         //Guarda los votos actualizados
@@ -60,7 +60,7 @@ return (
                             type="number"
                             min="0"
                             max="10"
-                            step="1"
+                            step="0.1"
                             value={puntuaciones[cat]}
                             onChange={handleInputChange}
                             className="w-full text-center text-gray-900 font-bold text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-md border-none"
