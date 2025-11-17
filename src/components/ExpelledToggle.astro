@@ -1,23 +1,40 @@
 ---
 // ExpelledToggle.astro
-let mostrarExpulsados = true;
-
-// Función que envía el valor al index
-const toggleExpulsados = () => {
-  mostrarExpulsados = !mostrarExpulsados;
-
-  // Creamos y lanzamos un evento personalizado con la nueva variable
-  window.dispatchEvent(
-    new CustomEvent("toggleExpulsados", {
-      detail: mostrarExpulsados
-    })
-  );
-};
+// Nota: todo lo que necesite ejecutarse en el cliente está dentro del <script> abajo.
+// El bloque server aquí no usa localStorage ni window.
 ---
-
 <button
+  id="expulsados-toggle"
   class="px-4 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800 transition"
-  onclick={toggleExpulsados}
 >
-  {mostrarExpulsados ? "Ocultar expulsados" : "Mostrar expulsados"}
+  Ocultar expulsados
 </button>
+
+<script>
+  (function () {
+    const btn = document.getElementById('expulsados-toggle');
+    if (!btn) return;
+
+    // Leemos el parámetro actual de la URL (si existe)
+    const params = new URLSearchParams(window.location.search);
+    const current = params.get('mostrarExpulsados'); // "true" | "false" | null
+    let mostrar = current === null ? true : current === 'true';
+
+    // Actualiza el texto del botón según el estado
+    const updateLabel = () => {
+      btn.textContent = mostrar ? 'Ocultar expulsados' : 'Mostrar expulsados';
+    };
+    updateLabel();
+
+    // Al hacer click togglamos y navegamos (preservando otros params)
+    btn.addEventListener('click', () => {
+      mostrar = !mostrar;
+      params.set('mostrarExpulsados', mostrar ? 'true' : 'false');
+
+      // Redirigimos usando la misma ruta pero con los search params actualizados
+      const base = window.location.pathname;
+      const qs = params.toString();
+      window.location.href = qs ? `${base}?${qs}` : base;
+    });
+  })();
+</script>

@@ -10,7 +10,7 @@ export const concursantesData = [
     { id: 7, nombre: "Claudia Arenas", estado: "concursante", imagen: "/concursantes/claudia.avif" },
     { id: 8, nombre: "Salma de Diego", estado: "expulsado", imagen: "/concursantes/salma.avif" }, 
     { id: 9, nombre: "Max", estado: "expulsado", imagen: "/concursantes/max.avif" }, 
-    { id: 10, nombre: "María Cruz", estado: "expulsaso", imagen: "/concursantes/maria.avif" },
+    { id: 10, nombre: "María Cruz", estado: "expulsado", imagen: "/concursantes/maria.avif" },
     { id: 11, nombre: "Guillo Rist", estado: "concursante", imagen: "/concursantes/guillo.avif" },  
     { id: 12, nombre: "Téyou", estado: "concursante", imagen: "/concursantes/teyou.avif" }, 
     { id: 13, nombre: "Tinho", estado: "concursante", imagen: "/concursantes/tinho.avif" },

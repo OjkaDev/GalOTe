@@ -7,11 +7,15 @@ import ScoreDisplay from '../components/ScoreDisplay.jsx';
 import ExpelledToggle from '../components/ExpelledToggle.astro';
 import '../styles/global.css';
 
-const mostrarExpulsados = true; // controlado por tu botón
 
-const listaParaRenderizar = mostrarExpulsados
+const params = new URL(Astro.request.url).searchParams;
+const mostrarParam = params.get("mostrarExpulsados");
+
+console.log ("MostrarParam es ", mostrarParam)
+
+const listaParaRenderizar = mostrarParam === "true"
   ? concursantesData
-  : concursantesData.filter(c => c.estado !== 'expulsado');
+  : concursantesData.filter(c => c.estado !== "expulsado");
 ---
 
 <html lang="es">
@@ -28,6 +32,7 @@ const listaParaRenderizar = mostrarExpulsados
 
       <div class="mb-8 flex justify-center">
         <ResetButton client:load />
+        <ExpelledToggle/>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
