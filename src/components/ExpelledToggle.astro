@@ -1,11 +1,8 @@
 ---
-// ExpelledToggle.astro
-// Nota: todo lo que necesite ejecutarse en el cliente está dentro del <script> abajo.
-// El bloque server aquí no usa localStorage ni window.
 ---
 <button
   id="expulsados-toggle"
-  class="px-4 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800 transition"
+  class="px-4 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800 transition mb-4"
 >
   Ocultar expulsados
 </button>
@@ -15,26 +12,24 @@
     const btn = document.getElementById('expulsados-toggle');
     if (!btn) return;
 
-    // Leemos el parámetro actual de la URL (si existe)
-    const params = new URLSearchParams(window.location.search);
-    const current = params.get('mostrarExpulsados'); // "true" | "false" | null
-    let mostrar = current === null ? true : current === 'true';
+    let mostrarExpulsados = true;
 
-    // Actualiza el texto del botón según el estado
     const updateLabel = () => {
-      btn.textContent = mostrar ? 'Ocultar expulsados' : 'Mostrar expulsados';
+      btn.textContent = mostrarExpulsados ? 'Ocultar expulsados' : 'Mostrar expulsados';
     };
     updateLabel();
 
-    // Al hacer click togglamos y navegamos (preservando otros params)
-    btn.addEventListener('click', () => {
-      mostrar = !mostrar;
-      params.set('mostrarExpulsados', mostrar ? 'true' : 'false');
+    const toggleExpulsados = () => {
+      mostrarExpulsados = !mostrarExpulsados;
+      updateLabel();
 
-      // Redirigimos usando la misma ruta pero con los search params actualizados
-      const base = window.location.pathname;
-      const qs = params.toString();
-      window.location.href = qs ? `${base}?${qs}` : base;
-    });
+      const cards = document.querySelectorAll('[data-estado]');
+      cards.forEach(el => {
+        const estado = el.dataset.estado;
+        el.style.display = mostrarExpulsados || estado !== 'expulsado' ? '' : 'none';
+      });
+    };
+
+    btn.addEventListener('click', toggleExpulsados);
   })();
 </script>
