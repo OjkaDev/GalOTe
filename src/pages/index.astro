@@ -4,7 +4,14 @@ import ConcursanteCard from '../components/ConcursanteCard.astro';
 import ModalWrapper from '../components/ModalWrapper.jsx';
 import ResetButton from '../components/ResetButton.jsx';
 import ScoreDisplay from '../components/ScoreDisplay.jsx';
+import ExpelledToggle from '../components/ExpelledToggle.astro';
 import '../styles/global.css';
+
+const mostrarExpulsados = true; // controlado por tu botón
+
+const listaParaRenderizar = mostrarExpulsados
+  ? concursantesData
+  : concursantesData.filter(c => c.estado !== 'expulsado');
 ---
 
 <html lang="es">
@@ -24,7 +31,7 @@ import '../styles/global.css';
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {concursantesData.map((concursante) => (
+        {listaParaRenderizar.map((concursante) => (
           <ModalWrapper client:load concursante={concursante}>
             <ConcursanteCard
               id={concursante.id}

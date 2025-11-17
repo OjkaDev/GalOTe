@@ -1,0 +1,23 @@
+---
+// ExpelledToggle.astro
+let mostrarExpulsados = true;
+
+// Función que envía el valor al index
+const toggleExpulsados = () => {
+  mostrarExpulsados = !mostrarExpulsados;
+
+  // Creamos y lanzamos un evento personalizado con la nueva variable
+  window.dispatchEvent(
+    new CustomEvent("toggleExpulsados", {
+      detail: mostrarExpulsados
+    })
+  );
+};
+---
+
+<button
+  class="px-4 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800 transition"
+  onclick={toggleExpulsados}
+>
+  {mostrarExpulsados ? "Ocultar expulsados" : "Mostrar expulsados"}
+</button>
