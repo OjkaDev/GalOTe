@@ -1,39 +1,52 @@
 ---
 import ConcursanteScoreDisplay from "./ConcursanteScoreDisplay";
 
-const {nombre, estado, imagen, id}= Astro.props;
+const { nombre, estado, imagen, id } = Astro.props;
 
-let borderColor = 'border-gray-900';
+let ringColor = 'ring-transparent';
+let statusBg = 'bg-indigo-500';
 let statusText = 'Activo';
 
 if (estado === 'nominado') {
-    borderColor = 'border-amber-500 ring-4 ring-amber-200';
-    statusText = 'NOMINADO';
+  ringColor = 'ring-4 ring-amber-400/50';
+  statusBg = 'bg-amber-500';
+  statusText = 'Nominado';
 } else if (estado === 'expulsado') {
-    borderColor = 'border-red-500 ring-4 ring-red-400 opacity-60';
-    statusText = 'EXPULSADO';
+  ringColor = 'ring-4 ring-rose-400/50';
+  statusBg = 'bg-rose-600';
+  statusText = 'Expulsado';
 }
 ---
 
-<article class={`bg-white shadow-xl rounded-xl border-t-8 ${borderColor} overflow-hidden transform hover:scale-[1.01] transition duration-300`} data-estado={estado}>
-<div class="relative overflow-hidden">
-    <img 
-        src={imagen}
-        alt={`Foto de ${nombre}`}
-        width="400"
-        height="400"
-        class="w-full h-full object-cover block"
+<article
+  class={`relative
+    bg-slate-800/60 backdrop-blur-xl border border-slate-700 rounded-2xl overflow-hidden
+    shadow-2xl shadow-purple-900/20
+    hover:scale-[1.03] hover:shadow-purple-500/40
+    transition-all duration-300
+    before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl
+    before:bg-gradient-to-br before:from-white/5 before:to-transparent before:opacity-0
+    hover:before:opacity-100 before:transition-opacity before:duration-300
+    ${ringColor}`}
+  data-estado={estado}
+>
+  <div class="relative">
+    <img
+      src={imagen}
+      alt={`Foto de ${nombre}`}
+      width="400"
+      height="400"
+      class="w-full h-auto object-cover rounded-xl shadow-lg shadow-black/30"
     />
-    <span class={`absolute top-3 right-3 text-sm font-bold px-3 py-1 rounded-full text-white 
-            ${estado === 'nominado' ? 'bg-amber-500' : 
-              estado === 'expulsado' ? 'bg-red-500' : 'bg-indigo-600'}`}>
-            {statusText}
+    <span class={`absolute top-3 right-3 text-xs font-bold px-3 py-1 rounded-full text-white ${statusBg}`}>
+      {statusText}
     </span>
-</div>
-<div class="p-5">
-        <h2 class="text-3xl text-center font-bold mb-4 text-gray-800">{nombre}</h2>
-        <ConcursanteScoreDisplay 
-            client:load 
-            concursanteId={id} 
-        />
+  </div>
+
+  <div class="p-5">
+    <h2 class="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 to-cyan-400 text-center">
+      {nombre}
+    </h2>
+    <ConcursanteScoreDisplay client:load concursanteId={id} />
+  </div>
 </article>

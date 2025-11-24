@@ -38,25 +38,36 @@ const ScoreDisplay = ({ concursanteId }) => {
     const totalScore = scores.Voz + scores.Actuacion + scores.General;
     const average = (totalScore / 3).toFixed(1);
 
-     return (
-        <div className="mt-3 pt-3 border-t border-gray-200">
-            <h4 className="text-sm font-semibold text-gray-600 mb-2 text-center">Tus Últimos Votos:</h4>
-            <div className="flex justify-around text-center">
-                <div className="flex flex-col items-center">
-                    <span className="text-xs text-gray-500">Voz</span>
-                    <span className="text-lg font-bold text-indigo-700">{scores.Voz}</span>
-                </div>
-                <div className="flex flex-col items-center">
-                    <span className="text-xs text-gray-500">Actuación</span>
-                    <span className="text-lg font-bold text-indigo-700">{scores.Actuacion}</span>
-                </div>
-                <div className="flex flex-col items-center">
-                    <span className="text-xs text-gray-500">Media</span>
-                    <span className="text-xl font-extrabold text-green-600">{average}</span>
-                </div>
-            </div>
-        </div>
-    );
+    return (
+  <div className="mt-4 pt-4 border-t border-slate-700">
+    <h4 className="text-sm font-semibold text-slate-300 mb-3 text-center">
+      Puntuación
+    </h4>
+
+    <div className="grid grid-cols-3 gap-3 text-center">
+      <div className="flex flex-col items-center gap-1">
+        <span className="text-xs text-slate-400">Voz</span>
+        <span className="text-lg font-black bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 to-cyan-400">
+          {scores.Voz}
+        </span>
+      </div>
+
+      <div className="flex flex-col items-center gap-1">
+        <span className="text-xs text-slate-400">Actuación</span>
+        <span className="text-lg font-black bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 to-cyan-400">
+          {scores.Actuacion}
+        </span>
+      </div>
+
+      <div className="flex flex-col items-center gap-1">
+        <span className="text-xs text-slate-400">Media</span>
+        <span className="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400">
+          {average}
+        </span>
+      </div>
+    </div>
+  </div>
+);
 };
 
 export default ScoreDisplay;

@@ -64,69 +64,84 @@ const ModalWrapper = ({ concursante, children }) => {
     }, [concursante]);
 
     return (
-        <>
-            {/* 1. La Tarjeta (Sigue siendo el botón para abrir la modal) */}
-            <div onClick={isExpulsado ? undefined : openModal} className={isExpulsado ? 'cursor-not-allowed' : 'cursor-pointer'}>
-                {children}
+  <>
+    {/* Tarjeta */}
+    <div
+      onClick={isExpulsado ? undefined : openModal}
+      className={
+        isExpulsado
+          ? 'cursor-not-allowed opacity-60'
+          : 'cursor-pointer group'
+      }
+    >
+      {children}
+    </div>
+
+    {/* Modal */}
+    {isModalOpen && (
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur p-4 transition-all"
+        onClick={closeModal}
+      >
+        <div
+          className="relative bg-slate-800/90 border border-slate-700 rounded-2xl shadow-2xl shadow-purple-900/20 w-full max-w-2xl p-6"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Botón cerrar */}
+          <button
+            onClick={closeModal}
+            className="absolute top-3 right-3 grid place-content-center w-9 h-9 rounded-full bg-slate-700/50 text-slate-300 hover:bg-slate-700 hover:text-white transition"
+            aria-label="Cerrar"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          {/* Contenido */}
+          <div className="flex flex-col md:flex-row gap-6">
+            {/* Columna imagen */}
+            <div className="md:w-1/3 flex-shrink-0">
+              <img
+                src={concursante.imagen}
+                alt={`Foto de ${concursante.nombre}`}
+                className="w-full h-auto object-cover rounded-xl shadow-lg shadow-black/30"
+              />
+              <h2 className="mt-3 text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 to-cyan-400 text-center">
+                {concursante.nombre}
+              </h2>
+              <p className="mt-1 text-sm text-center text-slate-400 font-semibold uppercase tracking-wide">
+                Estado: {concursante.estado}
+              </p>
             </div>
 
-            {/* 2. La Modal/Isla Flotante */}
-            {isModalOpen && (
-                <div 
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75 backdrop-blur-sm p-4"
-                    onClick={closeModal} 
-                >
-                    {/* Contenido de la Modal: Aumentado el ancho a max-w-2xl */}
-                    <div 
-                        className="bg-white rounded-xl shadow-2xl p-6 w-full max-w-2xl transform transition-all duration-300 scale-100"
-                        onClick={(e) => e.stopPropagation()} 
-                    >
-                        {/* Botón de Cierre (X) */}
-                        <button 
-                            onClick={closeModal}
-                            className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-3xl font-light"
-                        >
-                            &times;
-                        </button>
-                        
-                        {/* CONTENEDOR PRINCIPAL: Flexbox para Imagen y Votación */}
-                        <div className="flex flex-col md:flex-row gap-6"> 
-                            
-                            {/* COLUMNA 1: IMAGEN DEL CONCURSANTE (Ocupa 1/3) */}
-                            <div className="w-full md:w-1/3 flex-shrink-0">
-                                <img
-                                    src={concursante.imagen}
-                                    alt={`Foto de ${concursante.nombre}`}
-                                    // Aspecto 1/1 y centrado
-                                    className="w-full h-auto object-cover rounded-xl shadow-md"
-                                />
-                                <h2 className="text-2xl font-bold text-center text-gray-800 mt-3">
-                                    {concursante.nombre}
-                                </h2>
-                                <p className="text-sm text-center text-indigo-500 font-semibold uppercase mt-1">
-                                    Estado: {concursante.estado}
-                                </p>
-                            </div>
-
-                            {/* COLUMNA 2: VOTACIÓN (Ocupa 2/3) */}
-                            <div className="w-full md:w-2/3 pt-4 border-t md:border-t-0 md:border-l md:pl-6 border-gray-200">
-                                <h3 className="text-xl font-semibold mb-4 text-gray-600">
-                                    Puntuaciones (0-10)
-                                </h3>
-                                
-                                <Votacion 
-                                    concursanteId={concursante.id} 
-                                    nombreConcursante={concursante.nombre}
-                                    onVoteSuccess={closeModal}
-                                />
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </>
-    );
+            {/* Columna votación */}
+            <div className="md:w-2/3 pt-4 border-t border-slate-700 md:border-t-0 md:border-l md:pl-6">
+              <h3 className="mb-4 text-lg font-semibold text-slate-300 text-center">
+                Puntuaciones
+              </h3>
+              <Votacion
+                concursanteId={concursante.id}
+                nombreConcursante={concursante.nombre}
+                onVoteSuccess={closeModal}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+  </>
+);
 };
 
 export default ModalWrapper;
