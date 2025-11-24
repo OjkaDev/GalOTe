@@ -6,16 +6,6 @@ import ResetButton from '../components/ResetButton.jsx';
 import ScoreDisplay from '../components/ScoreDisplay.jsx';
 import ExpelledToggle from '../components/ExpelledToggle.astro';
 import '../styles/global.css';
-
-
-//const params = new URL(Astro.request.url).searchParams;
-//const mostrarParam = params.get("mostrarExpulsados");
-//
-//console.log ("MostrarParam es ", mostrarParam)
-//
-//const listaParaRenderizar = mostrarParam === "true"
-//  ? concursantesData
-//  : concursantesData.filter(c => c.estado !== "expulsado");
 ---
 
 <html lang="es">
@@ -24,20 +14,30 @@ import '../styles/global.css';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OT Votaciones</title>
   </head>
-  <body class="min-h-screen bg-gray-900 p-8 relative">
-    <main class="max-w-6xl mx-auto lg:pr-80">
-      <h1 class="text-5xl font-extrabold text-indigo-700 mb-10 text-center">
-        Votaciones de OT
-      </h1>
 
-      <div class="mb-8 flex justify-center">
+  <body class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-slate-100">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:pr-80">
+      <!-- Header -->
+      <header class="mb-12 text-center">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 to-cyan-400 drop-shadow">
+          OT Votaciones
+        </h1>
+        <p class="mt-3 text-slate-400 text-sm sm:text-base">Vota a tu concursante favorito</p>
+      </header>
+
+      <!-- Actions -->
+      <section class="mb-10 flex flex-col sm:flex-row items-center justify-center gap-4">
         <ResetButton client:load />
-        <ExpelledToggle/>
-      </div>
+        <ExpelledToggle />
+      </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-auto" style="grid-auto-flow: dense;">
+      <!-- Grid -->
+      <section
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto"
+        style="grid-auto-flow: dense;"
+      >
         {concursantesData.map((concursante) => (
-          <div data-estado={concursante.estado}>
+          <div data-estado={concursante.estado} class="group">
             <ModalWrapper client:load concursante={concursante}>
               <ConcursanteCard
                 id={concursante.id}
@@ -48,12 +48,12 @@ import '../styles/global.css';
             </ModalWrapper>
           </div>
         ))}
-      </div>
+      </section>
     </main>
 
-    <!-- Sidebar fijo a la derecha -->
-    <div class="fixed top-16 right-4 z-[70] md:top-4">
+    <!-- Sidebar -->
+    <aside class="fixed top-4 right-4 z-50 lg:block">
       <ScoreDisplay client:load />
-    </div>
+    </aside>
   </body>
 </html>

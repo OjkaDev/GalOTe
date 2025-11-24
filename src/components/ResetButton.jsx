@@ -24,19 +24,19 @@ const handleClick = () => {
 }
 
 return (
-        <button
-            onClick={handleClick}
-            className={`
-                px-4 py-2 rounded-lg font-semibold transition duration-300 shadow-md
-                ${isConfirming 
-                    ? 'bg-red-600 hover:bg-red-700 text-white animate-pulse' 
-                    : 'bg-gray-700 hover:bg-gray-600 text-gray-100'
-                }
-            `}
-        >
-            {isConfirming ? '¡CONFIRMAR REINICIO! (3s)' : 'Reiniciar Votaciones'}
-        </button>
-    );
+  <button
+    onClick={handleClick}
+    className={`
+      px-5 py-2.5 rounded-xl font-semibold shadow-lg transition-all duration-300
+      ${isConfirming
+        ? 'bg-gradient-to-br from-rose-500 to-red-600 text-white shadow-rose-500/30 animate-pulse scale-105'
+        : 'bg-gradient-to-br from-slate-700 to-slate-800 text-slate-100 hover:from-slate-600 hover:to-slate-700 shadow-slate-900/20 hover:scale-105 active:scale-95'
+      }
+    `}
+  >
+    {isConfirming ? '¡CONFIRMAR REINICIO!' : 'Reiniciar Votaciones'}
+  </button>
+);
 };
 
 export default ResetButton;

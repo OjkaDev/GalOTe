@@ -2,7 +2,7 @@
 ---
 <button
   id="expulsados-toggle"
-  class="px-4 py-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800 transition mb-4"
+  class="px-5 py-2.5 bg-gradient-to-br from-fuchsia-500 to-indigo-600 text-white rounded-xl shadow-lg shadow-fuchsia-500/20 hover:shadow-indigo-600/30 hover:scale-105 active:scale-95 transition-all duration-200"
 >
   Ocultar expulsados
 </button>
@@ -12,24 +12,29 @@
     const btn = document.getElementById('expulsados-toggle');
     if (!btn) return;
 
-    let mostrarExpulsados = true;
+    const STORAGE_KEY = 'ot_mostrarExpulsados';
+    let mostrarExpulsados = localStorage.getItem(STORAGE_KEY) !== 'false';
 
     const updateLabel = () => {
       btn.textContent = mostrarExpulsados ? 'Ocultar expulsados' : 'Mostrar expulsados';
     };
-    updateLabel();
 
-    const toggleExpulsados = () => {
-      mostrarExpulsados = !mostrarExpulsados;
-      updateLabel();
-
-      const cards = document.querySelectorAll('[data-estado]');
-      cards.forEach(el => {
-        const estado = el.dataset.estado;
-        el.style.display = mostrarExpulsados || estado !== 'expulsado' ? '' : 'none';
+    const applyFilter = () => {
+      document.querySelectorAll('[data-estado]').forEach(el => {
+        el.style.display = mostrarExpulsados || el.dataset.estado !== 'expulsado' ? '' : 'none';
       });
     };
 
+    const toggleExpulsados = () => {
+      mostrarExpulsados = !mostrarExpulsados;
+      localStorage.setItem(STORAGE_KEY, mostrarExpulsados);
+      updateLabel();
+      applyFilter();
+    };
+
     btn.addEventListener('click', toggleExpulsados);
+
+    updateLabel();
+    applyFilter();
   })();
 </script>
