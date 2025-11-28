@@ -1,4 +1,4 @@
-# 🚀 OT-Prueba — Proyecto Astro con React y TailwindCSS
+# 🚀 GalOTe — Proyecto Astro con React y TailwindCSS
 
 Este proyecto es una prueba técnica desarrollada con Astro 5, React 19 y TailwindCSS 4, creada con el propósito de practicar y profundizar en estas tecnologías. Durante mi primera semana de prácticas en SAGATECH recibí formación intensiva sobre estas herramientas y, tras asimilar la teoría, quise aplicarla en un proyecto real.
 
@@ -82,21 +82,8 @@ npm run preview
 ├─ package.json
 ├─ astro.config.mjs
 └─ tailwind.config.mjs
+
 ```
-
----
-
-## 🌐 Objetivo del proyecto
-
-Este proyecto es una prueba técnica y de aprendizaje para:
-
-* Practicar Astro junto con React.
-* Trabajar con TailwindCSS 4 en un entorno moderno.
-* Crear componentes reutilizables combinando Astro + React.
-* Desarrollar una estructura web escalable.
-
----
-
 ## 📄 Licencia
 
 Este proyecto está distribuido bajo la licencia **MIT**.
