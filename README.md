@@ -1,3 +1,8 @@
+![React](https://img.shields.io/badge/React-19.0-61DAFB?style=flat-square&logo=react)
+![Astro](https://img.shields.io/badge/Astro-5.0-FF5D01?style=flat-square&logo=astro)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES2024-F7DF1E?style=flat-square&logo=javascript)
+![License](https://img.shields.io/badge/License-AGPL--3.0-blue?style=flat-square)
+
 # 🚀 GalOTe — Proyecto Astro con React y TailwindCSS
 
 Este proyecto es una prueba técnica desarrollada con Astro 5, React 19 y TailwindCSS 4, creada con el propósito de practicar y profundizar en estas tecnologías. Durante mi primera semana de prácticas en SAGATECH recibí formación intensiva sobre estas herramientas y, tras asimilar la teoría, quise aplicarla en un proyecto real.
@@ -86,8 +91,7 @@ npm run preview
 ```
 ## 📄 Licencia
 
-Este proyecto está distribuido bajo la licencia **MIT**.
-Puedes utilizarlo y modificarlo libremente.
+Este proyecto está licenciado bajo la licencia GNU AFFERO GENERAL PUBLIC LICENSE - ver el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
 
