@@ -1,7 +1,7 @@
 // src/data/concursantes.js
 
 export const concursantesData = [
-    { id: 1, nombre: "Javi Crespo", estado: "concursante", imagen: "/concursantes/crespo.avif" },
+    { id: 1, nombre: "Javi Crespo", estado: "nominado", imagen: "/concursantes/crespo.avif" },
     { id: 2, nombre: "Olivia", estado: "concursante", imagen: "/concursantes/olivia.avif" },
     { id: 3, nombre: "Guille Toledano", estado: "concursante", imagen: "/concursantes/guille.avif" },
     { id: 4, nombre: "Judit", estado: "expulsado", imagen: "/concursantes/judit.avif" },
@@ -12,7 +12,7 @@ export const concursantesData = [
     { id: 9, nombre: "Max", estado: "expulsado", imagen: "/concursantes/max.avif" }, 
     { id: 10, nombre: "María Cruz", estado: "expulsado", imagen: "/concursantes/maria.avif" },
     { id: 11, nombre: "Guillo Rist", estado: "nominado", imagen: "/concursantes/guillo.avif" },  
-    { id: 12, nombre: "Téyou", estado: "nominado", imagen: "/concursantes/teyou.avif" }, 
+    { id: 12, nombre: "Téyou", estado: "expulsado", imagen: "/concursantes/teyou.avif" }, 
     { id: 13, nombre: "Tinho", estado: "concursante", imagen: "/concursantes/tinho.avif" },
     { id: 14, nombre: "Lucía Casani", estado: "expulsado", imagen: "/concursantes/lucia.avif" },
     { id: 15, nombre: "Laura Muñoz", estado: "expulsado", imagen: "/concursantes/laura.avif" },

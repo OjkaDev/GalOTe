@@ -1,51 +1,114 @@
-# Astro Starter Kit: Minimal
+# 🚀 OT-Prueba — Proyecto Astro con React y TailwindCSS
 
-```sh
-npm create astro@latest -- --template minimal
+Este proyecto es una prueba técnica desarrollada con Astro 5, React 19 y TailwindCSS 4, creada con el propósito de practicar y profundizar en estas tecnologías. Durante mi primera semana de prácticas en SAGATECH recibí formación intensiva sobre estas herramientas y, tras asimilar la teoría, quise aplicarla en un proyecto real.
+
+Buscaba crear algo útil, no solo un ejercicio más de práctica. La idea surgió de una costumbre que tengo con mi mujer: mientras vemos las galas del programa de televisión Operación Triunfo, nos gusta puntuar a los concursantes y hacer nuestras propias nominaciones, normalmente usando papel y boli. Vi la oportunidad perfecta de convertir esa dinámica en una aplicación práctica mientras experimentaba con estas tecnologías.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+* **Astro 5.14.1** — Framework ultrarápido orientado a componentes.
+* **React 19** — Para componentes interactivos dentro de Astro.
+* **TailwindCSS 4** — Estilos utilitarios modernos.
+* **@astrojs/react** — Integración oficial de React en Astro.
+* **Vite** — Dev server y bundler de alto rendimiento.
+
+---
+
+## 📘 ¿Qué he aprendido y consolidado?
+
+* **Astro + React** — Cómo combinar componentes `.astro` (estáticos) con componentes `.jsx` (interactivos) para optimizar el rendimiento y la experiencia del usuario.
+
+* **Gestión de estado con React Hooks** — Uso de `useState` y `useEffect` para manejar datos dinámicos, escuchar eventos globales y actualizar vistas en tiempo real.
+
+* **LocalStorage y eventos personalizados** — Almacenar datos en el navegador y usar `window.dispatchEvent()` para comunicar cambios entre componentes sin necesidad de prop drilling.
+
+* **TailwindCSS avanzado** — Clases de transición, animaciones suaves, grid dinámico con `grid-auto-flow: dense`, y estilos responsivos complejos.
+
+* **Integración de componentes Astro con React** — Resolver limitaciones como la imposibilidad de renderizar componentes `.astro` desde React, llevando a la conversión a JSX cuando es necesario.
+
+* **Arquitectura escalable** — Estructurar componentes reutilizables, separar lógica de presentación, y mantener el código limpio y modular.
+
+* **Trabajo con datos dinámicos** — Filtrar, ordenar y clasificar datos en función de criterios complejos (media de votos, estado de concursantes, nominaciones).
+
+* **Diseño Responsive** — Crear un diseño responsive para la correcta visualización tanto en ordenador como en móviles.
+
+
+## 📦 Instalación y ejecución
+
+### 1️⃣ Clonar el repositorio
+
+```bash
+git clone https://github.com/OjkaDev/GalOTe.git
+cd ot-prueba
 ```
 
-<!-- ASTRO:REMOVE:START -->
+### 2️⃣ Instalar dependencias
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+```bash
+npm install
+```
 
-<!-- ASTRO:REMOVE:END -->
+### 3️⃣ Ejecutar en modo desarrollo
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+```bash
+npm run dev
+```
 
-## 🚀 Project Structure
+### 4️⃣ Generar build para producción
 
-Inside of your Astro project, you'll see the following folders and files:
+```bash
+npm run build
+```
 
-```text
+### 5️⃣ Previsualizar la build
+
+```bash
+npm run preview
+```
+
+---
+
+## 📁 Estructura del proyecto
+
+```
 /
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+├─ public/           -> Archivos estáticos
+├─ src/
+│  ├─ components/    -> Componentes React y Astro
+│  ├─ layouts/       -> Plantillas de páginas
+│  └─ pages/         -> Rutas del sitio
+├─ package.json
+├─ astro.config.mjs
+└─ tailwind.config.mjs
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+---
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🌐 Objetivo del proyecto
 
-Any static assets, like images, can be placed in the `public/` directory.
+Este proyecto es una prueba técnica y de aprendizaje para:
 
-## 🧞 Commands
+* Practicar Astro junto con React.
+* Trabajar con TailwindCSS 4 en un entorno moderno.
+* Crear componentes reutilizables combinando Astro + React.
+* Desarrollar una estructura web escalable.
 
-All commands are run from the root of the project, from a terminal:
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 📄 Licencia
 
-## 👀 Want to learn more?
+Este proyecto está distribuido bajo la licencia **MIT**.
+Puedes utilizarlo y modificarlo libremente.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+
+## 💬 Contacto
+
+Si quieres contactar conmigo para ver más proyectos o colaborar:
+
+* **GitHub:** [https://github.com/OjkaDev](https://github.com/OjkaDev)
+* **LinkedIn:** *www.linkedin.com/in/óscar-calvellido-gil-145522207*
+
+---
