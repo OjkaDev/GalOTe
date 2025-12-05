@@ -7,7 +7,7 @@
 
 Este proyecto es una prueba técnica desarrollada con Astro 5, React 19 y TailwindCSS 4, creada con el propósito de practicar y profundizar en estas tecnologías. Durante mi primera semana de prácticas en SAGATECH recibí formación intensiva sobre estas herramientas y, tras asimilar la teoría, quise aplicarla en un proyecto real.
 
-Buscaba crear algo útil, no solo un ejercicio más de práctica. La idea surgió de una costumbre que tengo con mi mujer: mientras vemos las galas del programa de televisión Operación Triunfo, nos gusta puntuar a los concursantes y hacer nuestras propias nominaciones, normalmente usando papel y boli. Vi la oportunidad perfecta de convertir esa dinámica en una aplicación práctica mientras experimentaba con estas tecnologías.
+Buscaba crear algo útil, no solo un ejercicio más de práctica. La idea surgió de una costumbre que tengo con mi esposa: mientras vemos las galas del programa de televisión Operación Triunfo, nos gusta puntuar a los concursantes y hacer nuestras propias nominaciones, normalmente usando papel y boli. Vi la oportunidad perfecta de convertir esa dinámica en una aplicación práctica mientras experimentaba con estas tecnologías.
 
 ---
 
@@ -100,6 +100,6 @@ Este proyecto está licenciado bajo la licencia GNU AFFERO GENERAL PUBLIC LICENS
 Si quieres contactar conmigo para ver más proyectos o colaborar:
 
 * **GitHub:** [https://github.com/OjkaDev](https://github.com/OjkaDev)
-* **LinkedIn:** *www.linkedin.com/in/óscar-calvellido-gil-145522207*
+* **LinkedIn:** *www.linkedin.com/in/ojkadev*
 
 ---
